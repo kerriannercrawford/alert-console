@@ -1,0 +1,144 @@
+{
+    "alerts": [
+      {
+        "id": "a1b2c3d4-0001-4e5f-8a9b-000000000001",
+        "title": "Severe Weather Warning — Region 7",
+        "message": "A severe thunderstorm warning has been issued for Region 7. All field responders should seek shelter and await further instructions.",
+        "severity": "critical",
+        "audience": "responders",
+        "channel": "sms",
+        "status": "active",
+        "created_at": "2026-03-26T08:02:11Z"
+      },
+      {
+        "id": "a1b2c3d4-0002-4e5f-8a9b-000000000002",
+        "title": "Planned Maintenance Window — Dispatch Console",
+        "message": "The dispatch console will be unavailable from 02:00–04:00 EST on March 28. Please coordinate with supervisors for manual fallback procedures.",
+        "severity": "medium",
+        "audience": "admins",
+        "channel": "email",
+        "status": "active",
+        "created_at": "2026-03-26T09:15:00Z"
+      },
+      {
+        "id": "a1b2c3d4-0003-4e5f-8a9b-000000000003",
+        "title": "Mass Casualty Incident — Downtown",
+        "message": "MCI declared at 4th and Main. All available EMS units are requested to stage at the north perimeter. Command post established at City Hall.",
+        "severity": "critical",
+        "audience": "all",
+        "channel": "push",
+        "status": "active",
+        "created_at": "2026-03-26T10:44:33Z"
+      },
+      {
+        "id": "a1b2c3d4-0004-4e5f-8a9b-000000000004",
+        "title": "System Connectivity Test — West Zone",
+        "message": "Routine connectivity test for West Zone units. No action required. Respond CONFIRM to acknowledge receipt.",
+        "severity": "low",
+        "audience": "responders",
+        "channel": "chat",
+        "status": "resolved",
+        "created_at": "2026-03-25T14:00:00Z"
+      },
+      {
+        "id": "a1b2c3d4-0005-4e5f-8a9b-000000000005",
+        "title": "Active Shooter — Northside Mall",
+        "message": "Law enforcement responding to reports of an active shooter at Northside Mall. Civilians are advised to shelter in place. Do not enter the area.",
+        "severity": "critical",
+        "audience": "all",
+        "channel": "sms",
+        "status": "active",
+        "created_at": "2026-03-26T11:30:55Z"
+      },
+      {
+        "id": "a1b2c3d4-0006-4e5f-8a9b-000000000006",
+        "title": "Hazmat Spill — Route 9 Industrial",
+        "message": "Chemical spill reported on Route 9 near Industrial Pkwy. Hazmat team deployed. Avoid the area and keep windows closed.",
+        "severity": "high",
+        "audience": "all",
+        "channel": "push",
+        "status": "active",
+        "created_at": "2026-03-26T07:55:20Z"
+      },
+      {
+        "id": "a1b2c3d4-0007-4e5f-8a9b-000000000007",
+        "title": "EMS Protocol Update — Cardiac Arrest",
+        "message": "Updated cardiac arrest protocol now in effect. Please review the attached PDF before your next shift.",
+        "severity": "medium",
+        "audience": "responders",
+        "channel": "email",
+        "status": "draft",
+        "created_at": "2026-03-25T16:22:00Z"
+      },
+      {
+        "id": "a1b2c3d4-0008-4e5f-8a9b-000000000008",
+        "title": "Power Outage — East Grid Sector 4",
+        "message": "Widespread power outage affecting East Grid Sector 4. Backup generators should be activated at all affected facilities.",
+        "severity": "high",
+        "audience": "admins",
+        "channel": "sms",
+        "status": "active",
+        "created_at": "2026-03-26T06:10:45Z"
+      },
+      {
+        "id": "a1b2c3d4-0009-4e5f-8a9b-000000000009",
+        "title": "Flood Advisory — River District",
+        "message": "Rising water levels in the River District. Residents in low-lying areas are advised to move to higher ground immediately.",
+        "severity": "high",
+        "audience": "all",
+        "channel": "push",
+        "status": "active",
+        "created_at": "2026-03-26T05:30:00Z"
+      },
+      {
+        "id": "a1b2c3d4-0010-4e5f-8a9b-000000000010",
+        "title": "Monthly Drill Reminder — Station 12",
+        "message": "Monthly readiness drill scheduled for Station 12 on March 29 at 09:00 EST. Attendance is mandatory for all on-duty staff.",
+        "severity": "low",
+        "audience": "responders",
+        "channel": "chat",
+        "status": "draft",
+        "created_at": "2026-03-25T11:00:00Z"
+      }
+    ],
+    "delivery_events": [
+      { "id": "e0000001-0000-4000-8000-000000000001", "alert_id": "a1b2c3d4-0001-4e5f-8a9b-000000000001", "event_type": "queued", "timestamp": "2026-03-26T08:02:12Z", "recipient_count": 142 },
+      { "id": "e0000001-0000-4000-8000-000000000002", "alert_id": "a1b2c3d4-0001-4e5f-8a9b-000000000001", "event_type": "sent", "timestamp": "2026-03-26T08:02:15Z", "recipient_count": 142 },
+      { "id": "e0000001-0000-4000-8000-000000000003", "alert_id": "a1b2c3d4-0001-4e5f-8a9b-000000000001", "event_type": "delivered", "timestamp": "2026-03-26T08:02:28Z", "recipient_count": 138 },
+      { "id": "e0000001-0000-4000-8000-000000000004", "alert_id": "a1b2c3d4-0001-4e5f-8a9b-000000000001", "event_type": "failed", "timestamp": "2026-03-26T08:02:30Z", "recipient_count": 4 },
+  
+      { "id": "e0000002-0000-4000-8000-000000000001", "alert_id": "a1b2c3d4-0002-4e5f-8a9b-000000000002", "event_type": "queued", "timestamp": "2026-03-26T09:15:01Z", "recipient_count": 28 },
+      { "id": "e0000002-0000-4000-8000-000000000002", "alert_id": "a1b2c3d4-0002-4e5f-8a9b-000000000002", "event_type": "sent", "timestamp": "2026-03-26T09:15:04Z", "recipient_count": 28 },
+      { "id": "e0000002-0000-4000-8000-000000000003", "alert_id": "a1b2c3d4-0002-4e5f-8a9b-000000000002", "event_type": "delivered", "timestamp": "2026-03-26T09:15:20Z", "recipient_count": 27 },
+      { "id": "e0000002-0000-4000-8000-000000000004", "alert_id": "a1b2c3d4-0002-4e5f-8a9b-000000000002", "event_type": "read", "timestamp": "2026-03-26T09:22:45Z", "recipient_count": 19 },
+  
+      { "id": "e0000003-0000-4000-8000-000000000001", "alert_id": "a1b2c3d4-0003-4e5f-8a9b-000000000003", "event_type": "queued", "timestamp": "2026-03-26T10:44:34Z", "recipient_count": 530 },
+      { "id": "e0000003-0000-4000-8000-000000000002", "alert_id": "a1b2c3d4-0003-4e5f-8a9b-000000000003", "event_type": "sent", "timestamp": "2026-03-26T10:44:38Z", "recipient_count": 530 },
+      { "id": "e0000003-0000-4000-8000-000000000003", "alert_id": "a1b2c3d4-0003-4e5f-8a9b-000000000003", "event_type": "delivered", "timestamp": "2026-03-26T10:44:55Z", "recipient_count": 511 },
+      { "id": "e0000003-0000-4000-8000-000000000004", "alert_id": "a1b2c3d4-0003-4e5f-8a9b-000000000003", "event_type": "failed", "timestamp": "2026-03-26T10:44:58Z", "recipient_count": 19 },
+  
+      { "id": "e0000004-0000-4000-8000-000000000001", "alert_id": "a1b2c3d4-0004-4e5f-8a9b-000000000004", "event_type": "queued", "timestamp": "2026-03-25T14:00:01Z", "recipient_count": 22 },
+      { "id": "e0000004-0000-4000-8000-000000000002", "alert_id": "a1b2c3d4-0004-4e5f-8a9b-000000000004", "event_type": "sent", "timestamp": "2026-03-25T14:00:03Z", "recipient_count": 22 },
+      { "id": "e0000004-0000-4000-8000-000000000003", "alert_id": "a1b2c3d4-0004-4e5f-8a9b-000000000004", "event_type": "delivered", "timestamp": "2026-03-25T14:00:05Z", "recipient_count": 22 },
+      { "id": "e0000004-0000-4000-8000-000000000004", "alert_id": "a1b2c3d4-0004-4e5f-8a9b-000000000004", "event_type": "read", "timestamp": "2026-03-25T14:03:10Z", "recipient_count": 20 },
+  
+      { "id": "e0000005-0000-4000-8000-000000000001", "alert_id": "a1b2c3d4-0005-4e5f-8a9b-000000000005", "event_type": "queued", "timestamp": "2026-03-26T11:30:56Z", "recipient_count": 895 },
+      { "id": "e0000005-0000-4000-8000-000000000002", "alert_id": "a1b2c3d4-0005-4e5f-8a9b-000000000005", "event_type": "sent", "timestamp": "2026-03-26T11:31:02Z", "recipient_count": 895 },
+      { "id": "e0000005-0000-4000-8000-000000000003", "alert_id": "a1b2c3d4-0005-4e5f-8a9b-000000000005", "event_type": "delivered", "timestamp": "2026-03-26T11:31:20Z", "recipient_count": 872 },
+      { "id": "e0000005-0000-4000-8000-000000000004", "alert_id": "a1b2c3d4-0005-4e5f-8a9b-000000000005", "event_type": "failed", "timestamp": "2026-03-26T11:31:22Z", "recipient_count": 23 },
+  
+      { "id": "e0000006-0000-4000-8000-000000000001", "alert_id": "a1b2c3d4-0006-4e5f-8a9b-000000000006", "event_type": "queued", "timestamp": "2026-03-26T07:55:21Z", "recipient_count": 310 },
+      { "id": "e0000006-0000-4000-8000-000000000002", "alert_id": "a1b2c3d4-0006-4e5f-8a9b-000000000006", "event_type": "sent", "timestamp": "2026-03-26T07:55:25Z", "recipient_count": 310 },
+      { "id": "e0000006-0000-4000-8000-000000000003", "alert_id": "a1b2c3d4-0006-4e5f-8a9b-000000000006", "event_type": "delivered", "timestamp": "2026-03-26T07:55:40Z", "recipient_count": 298 },
+      { "id": "e0000006-0000-4000-8000-000000000004", "alert_id": "a1b2c3d4-0006-4e5f-8a9b-000000000006", "event_type": "failed", "timestamp": "2026-03-26T07:55:41Z", "recipient_count": 12 },
+  
+      { "id": "e0000008-0000-4000-8000-000000000001", "alert_id": "a1b2c3d4-0008-4e5f-8a9b-000000000008", "event_type": "queued", "timestamp": "2026-03-26T06:10:46Z", "recipient_count": 45 },
+      { "id": "e0000008-0000-4000-8000-000000000002", "alert_id": "a1b2c3d4-0008-4e5f-8a9b-000000000008", "event_type": "sent", "timestamp": "2026-03-26T06:10:49Z", "recipient_count": 45 },
+      { "id": "e0000008-0000-4000-8000-000000000003", "alert_id": "a1b2c3d4-0008-4e5f-8a9b-000000000008", "event_type": "delivered", "timestamp": "2026-03-26T06:11:00Z", "recipient_count": 44 },
+  
+      { "id": "e0000009-0000-4000-8000-000000000001", "alert_id": "a1b2c3d4-0009-4e5f-8a9b-000000000009", "event_type": "queued", "timestamp": "2026-03-26T05:30:01Z", "recipient_count": 720 },
+      { "id": "e0000009-0000-4000-8000-000000000002", "alert_id": "a1b2c3d4-0009-4e5f-8a9b-000000000009", "event_type": "sent", "timestamp": "2026-03-26T05:30:06Z", "recipient_count": 720 },
+      { "id": "e0000009-0000-4000-8000-000000000003", "alert_id": "a1b2c3d4-0009-4e5f-8a9b-000000000009", "event_type": "delivered", "timestamp": "2026-03-26T05:30:22Z", "recipient_count": 705 },
+      { "id": "e0000009-0000-4000-8000-000000000004", "alert_id": "a1b2c3d4-0009-4e5f-8a9b-000000000009", "event_type": "failed", "timestamp": "2026-03-26T05:30:24Z", "recipient_count": 15 }
+    ]
+  }
