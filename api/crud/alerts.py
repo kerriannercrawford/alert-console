@@ -63,4 +63,7 @@ def create_delivery_event(alert_id: str, data: CreateDeliveryEvent) -> DeliveryE
     timestamp = datetime.now(timezone.utc).isoformat()
     event = DeliveryEvent(**data.model_dump(), id=event_id, alert_id=alert_id, timestamp=timestamp)
     _events_by_alert[alert_id].append(event)
+
+
+
     return event

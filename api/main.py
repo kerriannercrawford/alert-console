@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api.routers.alerts import router as alerts_router
+from api.routers.websocket import router as websocket_router
 from api.crud.alerts import init_data
 
 init_data()
@@ -16,6 +17,7 @@ app.add_middleware(
 )
 
 app.include_router(alerts_router)
+app.include_router(websocket_router)
 
 @app.get("/", response_model=str)
 async def test_endpoint() -> str:

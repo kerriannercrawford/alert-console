@@ -10,6 +10,7 @@ from api.models import (
     DeliveryEvent,
     CreateDeliveryEvent
 )
+from api.routers.websocket import broadcast_event
 
 router = APIRouter(prefix="/alerts", tags=["alerts"])
 
@@ -35,4 +36,6 @@ async def get_alert(alert_id: str) -> AlertDetail:
 
 @router.post("/{alert_id}/events", response_model=DeliveryEvent)
 async def add_delivery_event(alert_id: str, data: CreateDeliveryEvent) -> DeliveryEvent:
-    return create_delivery_event(alert_id, data)
+    event = create_delivery_event(alert_id, data)
+    await broadcast_event(event.model_dump())
+    return event
