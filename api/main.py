@@ -1,11 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers.alerts import router as alerts_router
-from crud.alerts import _init_alerts
-from crud.deliveryEvents import _init_delivery_events
+from api.routers.alerts import router as alerts_router
+from api.crud.alerts import init_data
 
-_init_alerts()
-_init_delivery_events()
+init_data()
 
 app = FastAPI(title="Event App", version="0.1.0")
 

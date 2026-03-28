@@ -3,21 +3,28 @@ For purposes of this takehome, decided to use an in-memory store to
 store the events for ease of implementation. This can be swapped out
 for a database-backed implementation without touching the rest of the app.
 """
-from models import Alert, Severity, Status, Channel
+from api.models import Alert, Severity, Status, Channel, CreateAlert, AlertDetail, CreateDeliveryEvent, DeliveryEvent
 import json
+import uuid
+from datetime import datetime, timezone
 
 _alerts: dict[str, Alert] = {}
+_events_by_alert: dict[str, list] = {}
 
-def _init_alerts() -> None:
-    with open("crud/data.json", "r") as f:
+def init_data() -> None:
+    with open("api/crud/data.json", "r") as f:
         data = json.load(f)
         for alert in data["alerts"]:
             _alerts[alert["id"]] = Alert(**alert)
+        for event in data["delivery_events"]:
+            if event["alert_id"] not in _events_by_alert:
+                _events_by_alert[event["alert_id"]] = []
+            _events_by_alert[event["alert_id"]].append(event)
 
 def get_all(
-    status: Status | None,
-    severity: Severity | None,
-    channel: Channel | None,
+    status: Status | None = None,
+    severity: Severity | None = None,
+    channel: Channel | None = None,
 ) -> list[Alert]:
     alerts = list(_alerts.values())
 
@@ -31,3 +38,29 @@ def get_all(
         alerts = [alert for alert in alerts if alert.channel == channel]
 
     return alerts
+
+def create(data: CreateAlert) -> Alert:
+    alert_id = str(uuid.uuid4())
+    created_at = datetime.now(timezone.utc).isoformat()
+    print(created_at)
+    alert = Alert(**data.model_dump(), id=alert_id, created_at=created_at)
+    _alerts[alert_id] = Alert(**data.model_dump(), id=alert_id, created_at=created_at)
+    return alert
+
+def get_by_id(alert_id: str) -> AlertDetail:
+    if alert_id not in _alerts:
+        raise Exception("Alert not found")
+    alert = _alerts[alert_id]
+    events = _events_by_alert.get(alert_id, [])
+    return AlertDetail(alert=alert, events=events)
+
+def create_delivery_event(alert_id: str, data: CreateDeliveryEvent) -> DeliveryEvent:
+    if alert_id not in _alerts:
+        raise Exception("Alert not found")
+    if alert_id not in _events_by_alert:
+        _events_by_alert[alert_id] = []
+    event_id = str(uuid.uuid4())
+    timestamp = datetime.now(timezone.utc).isoformat()
+    event = DeliveryEvent(**data.model_dump(), id=event_id, alert_id=alert_id, timestamp=timestamp)
+    _events_by_alert[alert_id].append(event)
+    return event
