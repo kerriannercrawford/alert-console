@@ -1,4 +1,4 @@
-import {Alert} from "../types.ts";
+import {Alert, AlertDetail, CreateAlert, CreateDeliveryEvent, DeliveryEvent} from "../types.ts";
 import axios from "axios";
 
 const axiosInstance = axios.create({
@@ -10,8 +10,17 @@ export async function fetchAlerts(): Promise<Alert[]> {
     return response.data
 }
 
-export async function fetchAlertDetails() {}
+export async function fetchAlertDetails(alertId: string): Promise<AlertDetail> {
+    const response = await axiosInstance.get<AlertDetail>(`${alertId}`)
+    return response.data
+}
 
-export async function createAlert() {}
+export async function createAlert(data: CreateAlert): Promise<Alert> {
+    const response = await axiosInstance.post<Alert>('', data)
+    return response.data
+}
 
-export async function createDeliveryEvent() {}
+export async function createDeliveryEvent(alertId: string, data: CreateDeliveryEvent): Promise<DeliveryEvent> {
+    const response = await axiosInstance.post<DeliveryEvent>(`${alertId}/events`, data)
+    return response.data
+}
