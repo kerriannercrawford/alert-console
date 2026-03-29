@@ -16,7 +16,6 @@ export default function App() {
         setDeliveryEvents((current) => {
             const alreadyExists = current.some((existing) => existing.id === event.id)
             if (alreadyExists) return current
-
             return [...current, event]
         })
     }, [])
@@ -27,20 +26,45 @@ export default function App() {
         return deliveryEvents.filter((event) => event.alert_id === selectedAlertId)
     }, [deliveryEvents, selectedAlertId])
 
+    const latestEventByAlertId = useMemo(() => {
+        const map: Record<string, DeliveryEvent> = {}
+
+        for (const alert of alerts) {
+            if (alert.latest_event) {
+                map[alert.id] = alert.latest_event
+            }
+        }
+
+        for (const event of deliveryEvents) {
+            const current = map[event.alert_id]
+            if (!current || new Date(event.timestamp) > new Date(current.timestamp)) {
+                map[event.alert_id] = event
+            }
+        }
+
+        return map
+    }, [alerts, deliveryEvents])
+
     const { isConnected, error: websocketError } = useWebSocket(handleIncomingEvent)
 
     return (
         <div className="App">
             <h1>Alerts</h1>
             { loading && <p>Loading...</p> }
-            { error && <p style={{ color: 'red' }}>Error: {error}</p> }
+            { (error || websocketError) && <p style={{ color: 'red' }}>Error: {error || websocketError}</p> }
 
             {
                 !loading && !error && (
-                    <AlertsTable alerts={alerts} loading={loading} onRefresh={refetch} onCreateAlert={() => setCreateAlertOpen(true)} onRowClick={(alertId) => {
-                        console.log(alertId)
-                        setSelectedAlertId(alertId)
-                    }}/>
+                    <AlertsTable
+                        alerts={alerts}
+                        loading={loading}
+                        latestEventByAlertId={latestEventByAlertId}
+                        onRefresh={refetch}
+                        onCreateAlert={() => setCreateAlertOpen(true)}
+                        onRowClick={(alertId) => {
+                            setSelectedAlertId(alertId)
+                        }}
+                    />
                 )
             }
 

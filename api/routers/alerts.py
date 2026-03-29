@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from api.crud.alerts import get_all, create, get_by_id, create_delivery_event
 from api.models import (
     Alert,
+    AlertSummary,
     Status,
     Severity,
     Channel,
@@ -14,12 +15,12 @@ from api.routers.websocket import broadcast_event
 
 router = APIRouter(prefix="/alerts", tags=["alerts"])
 
-@router.get("", response_model=list[Alert])
+@router.get("", response_model=list[AlertSummary])
 async def list_alerts(
     status: Status | None = None,
     severity: Severity | None = None,
     channel: Channel | None = None,
-) -> list[Alert]:
+) -> list[AlertSummary]:
     return get_all(
         status=status,
         severity=severity,

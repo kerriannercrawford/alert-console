@@ -1,7 +1,7 @@
 import {AlertsTableProps} from "../types.ts";
 
 
-export function AlertsTable({ alerts, loading, onRowClick, onRefresh, onCreateAlert }: AlertsTableProps) {
+export function AlertsTable({ alerts, loading, latestEventByAlertId, onRowClick, onRefresh, onCreateAlert }: AlertsTableProps) {
     return (
         <div className="table-wrapper">
             <table>
@@ -21,7 +21,11 @@ export function AlertsTable({ alerts, loading, onRowClick, onRefresh, onCreateAl
                             <td><span className={`badge badge-${alert.severity}`}>{alert.severity}</span></td>
                             <td>{alert.channel}</td>
                             <td><span className={`badge badge-${alert.status}`}>{alert.status}</span></td>
-                            <td>{/* TODO: Fetch and display latest delivery state */}</td>
+                            <td>
+                                {latestEventByAlertId[alert.id]
+                                    ? <span className={`badge badge-event-${latestEventByAlertId[alert.id].event_type}`}>{latestEventByAlertId[alert.id].event_type}</span>
+                                    : <span className="badge-empty">—</span>}
+                            </td>
                         </tr>
                     ))}
                 </tbody>

@@ -1,12 +1,12 @@
-import {Alert, AlertDetail, CreateAlert, CreateDeliveryEvent, DeliveryEvent} from "../types.ts";
+import {Alert, AlertDetail, AlertSummary, CreateAlert, CreateDeliveryEvent, DeliveryEvent} from "../types.ts";
 import axios from "axios";
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:8000/alerts'
 })
 
-export async function fetchAlerts(): Promise<Alert[]> {
-    const response = await axiosInstance.get<Alert[]>('')
+export async function fetchAlerts(): Promise<AlertSummary[]> {
+    const response = await axiosInstance.get<AlertSummary[]>('')
     return response.data
 }
 

@@ -39,14 +39,19 @@ export type CreateDeliveryEvent = {
     recipient_count?: number | null
 }
 
+export type AlertSummary = Alert & {
+    latest_event: DeliveryEvent | null
+}
+
 export type AlertDetail = {
     alert: Alert
     events: DeliveryEvent[]
 }
 
 export type AlertsTableProps = {
-    alerts: Alert[]
+    alerts: AlertSummary[]
     loading: boolean
+    latestEventByAlertId: Record<string, DeliveryEvent>
     onRowClick: (alertId: string) => void
     onRefresh: () => void
     onCreateAlert: () => void

@@ -38,6 +38,9 @@ class CreateDeliveryEvent(BaseModel):
     recipient: str | None = None
     recipient_count: int | None = None
 
+class AlertSummary(Alert):
+    latest_event: DeliveryEvent | None = None
+
 class AlertDetail(BaseModel):
     alert: Alert
     events: list[DeliveryEvent]

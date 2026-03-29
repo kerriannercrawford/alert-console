@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { fetchAlerts } from "../api/alert.ts";
-import { Alert } from "../types.ts";
+import { AlertSummary } from "../types.ts";
 
-export function useAlerts(): { alerts: Alert[]; error: string | null; loading: boolean; refetch: () => void } {
-    const [alerts, setAlerts] = useState<Alert[]>([])
+export function useAlerts(): { alerts: AlertSummary[]; error: string | null; loading: boolean; refetch: () => void } {
+    const [alerts, setAlerts] = useState<AlertSummary[]>([])
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [tick, setTick] = useState(0);
@@ -11,7 +11,7 @@ export function useAlerts(): { alerts: Alert[]; error: string | null; loading: b
     useEffect(() => {
         setLoading(true);
         setError(null);
-        fetchAlerts().then((alerts: Alert[]) => {
+        fetchAlerts().then((alerts: AlertSummary[]) => {
             setAlerts(alerts);
             setLoading(false);
         }).catch(error => {

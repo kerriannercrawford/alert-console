@@ -3,7 +3,7 @@ For purposes of this takehome, decided to use an in-memory store to
 store the events for ease of implementation. This can be swapped out
 for a database-backed implementation without touching the rest of the app.
 """
-from api.models import Alert, Severity, Status, Channel, CreateAlert, AlertDetail, CreateDeliveryEvent, DeliveryEvent
+from api.models import Alert, AlertSummary, Severity, Status, Channel, CreateAlert, AlertDetail, CreateDeliveryEvent, DeliveryEvent
 import json
 import uuid
 from datetime import datetime, timezone
@@ -25,7 +25,7 @@ def get_all(
     status: Status | None = None,
     severity: Severity | None = None,
     channel: Channel | None = None,
-) -> list[Alert]:
+) -> list[AlertSummary]:
     alerts = list(_alerts.values())
 
     if status is not None:
@@ -37,7 +37,15 @@ def get_all(
     if channel is not None:
         alerts = [alert for alert in alerts if alert.channel == channel]
 
-    return alerts
+    summaries = []
+    for alert in alerts:
+        events = _events_by_alert.get(alert.id, [])
+        latest = max(events, key=lambda e: e["timestamp"] if isinstance(e, dict) else e.timestamp, default=None)
+        if latest is not None and isinstance(latest, dict):
+            latest = DeliveryEvent(**latest)
+        summaries.append(AlertSummary(**alert.model_dump(), latest_event=latest))
+
+    return summaries
 
 def create(data: CreateAlert) -> Alert:
     alert_id = str(uuid.uuid4())
