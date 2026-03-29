@@ -43,3 +43,23 @@ export type AlertDetail = {
     alert: Alert
     events: DeliveryEvent[]
 }
+
+export type AlertsTableProps = {
+    alerts: Alert[]
+    loading: boolean
+    onRowClick: (alertId: string) => void
+    onRefresh: () => void
+    onCreateAlert: () => void
+}
+
+export type CreateAlertSlideoutProps = {
+    isOpen: boolean
+    onClose: () => void
+}
+
+export type AlertDetailSlideoutProps = {
+    alertId: string | null
+    isOpen: boolean
+    onClose: () => void
+    liveEvents: DeliveryEvent[]
+}
