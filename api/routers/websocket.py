@@ -15,7 +15,8 @@ async def websocket_endpoint(websocket: WebSocket):
             for connection in _connections:
                 await connection.send_text(f"Message text was: {data}")
     except WebSocketDisconnect:
-        _connections.remove(websocket)
+        if websocket in _connections:
+            _connections.remove(websocket)
 
 
 async def broadcast_event(event: dict):
