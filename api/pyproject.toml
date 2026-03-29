@@ -1,0 +1,11 @@
+[tool.ruff]
+src = ["api"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes (unused imports, undefined names, etc.)
+    "I",   # isort (import ordering)
+    "UP",  # pyupgrade (modern Python idioms)
+]

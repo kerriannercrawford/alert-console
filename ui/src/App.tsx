@@ -1,10 +1,10 @@
-import {useAlerts} from "./hooks/useAlerts.ts";
-import {AlertsTable} from "./components/AlertsTable.tsx";
-import {useCallback, useMemo, useState} from "react";
-import {AlertDetailSlideout} from "./components/AlertDetailSlideout.tsx";
-import {CreateAlertSlideout} from "./components/CreateAlertSlideout.tsx";
-import {DeliveryEvent} from "./types.ts";
-import {useWebSocket} from "./hooks/useWebSocket.ts";
+import { useAlerts } from './hooks/useAlerts.ts'
+import { AlertsTable } from './components/AlertsTable.tsx'
+import { useCallback, useMemo, useState } from 'react'
+import { AlertDetailSlideout } from './components/AlertDetailSlideout.tsx'
+import { CreateAlertSlideout } from './components/CreateAlertSlideout.tsx'
+import { DeliveryEvent } from './types.ts'
+import { useWebSocket } from './hooks/useWebSocket.ts'
 
 export default function App() {
     const { alerts, loading, error, refetch } = useAlerts()
@@ -45,7 +45,7 @@ export default function App() {
         return map
     }, [alerts, deliveryEvents])
 
-    const { isConnected, error: websocketError } = useWebSocket(handleIncomingEvent)
+    const { error: websocketError } = useWebSocket(handleIncomingEvent)
 
     return (
         <div className="App">

@@ -11,17 +11,17 @@ export function connectToAlertStream(
     }
 
     socket.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        onMessage(data);
+        const data = JSON.parse(event.data)
+        onMessage(data)
     }
 
     socket.onerror = (error) => {
-        onError(error);
+        onError(error)
     }
 
     socket.onclose = () => {
         onClose()
     }
 
-    return socket;
+    return socket
 }

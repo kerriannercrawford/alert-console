@@ -1,14 +1,14 @@
-import {AlertDetail, AlertDetailSlideoutProps, EventType} from "../types.ts";
-import {useAlertDetail} from "../hooks/useAlertDetail.ts";
-import {useCreateDeliveryEvent} from "../hooks/useCreateDeliveryEvent.ts";
-import {useEffect, useMemo, useState} from "react";
+import { AlertDetail, AlertDetailSlideoutProps, EventType } from '../types.ts'
+import { useAlertDetail } from '../hooks/useAlertDetail.ts'
+import { useCreateDeliveryEvent } from '../hooks/useCreateDeliveryEvent.ts'
+import { useEffect, useMemo, useState } from 'react'
 
-const eventTypeOptions: EventType[] = ["queued", "sent", "delivered", "failed", "read"]
+const eventTypeOptions: EventType[] = ['queued', 'sent', 'delivered', 'failed', 'read']
 
 export function AlertDetailSlideout({ alertId, onClose, isOpen, liveEvents }: AlertDetailSlideoutProps) {
     const { alertDetail, loading, error } = useAlertDetail(alertId)
     const [localAlertDetail, setLocalAlertDetail] = useState<AlertDetail | null>(null)
-    const [selectedEventType, setSelectedEventType] = useState<EventType>("queued")
+    const [selectedEventType, setSelectedEventType] = useState<EventType>('queued')
     const [recipientCount, setRecipientCount] = useState<number | null>(null)
     const { simulate, loading: simulating, error: simError } = useCreateDeliveryEvent()
 
@@ -44,8 +44,8 @@ export function AlertDetailSlideout({ alertId, onClose, isOpen, liveEvents }: Al
 
     return (
         <>
-            <div className={`drawer-backdrop${isOpen ? " is-open" : ""}`} onClick={onClose} />
-            <aside className={`drawer${isOpen ? " is-open" : ""}`}>
+            <div className={`drawer-backdrop${isOpen ? ' is-open' : ''}`} onClick={onClose} />
+            <aside className={`drawer${isOpen ? ' is-open' : ''}`}>
                 <div className="drawer-header">
                     <h2>Alert Details</h2>
                     <button onClick={onClose}>Close</button>
@@ -93,7 +93,7 @@ export function AlertDetailSlideout({ alertId, onClose, isOpen, liveEvents }: Al
                                 type="number"
                                 min={1}
                                 placeholder="# recipients"
-                                value={recipientCount ?? ""}
+                                value={recipientCount ?? ''}
                                 onChange={(e) => setRecipientCount(e.target.value ? parseInt(e.target.value) : null)}
                                 disabled={simulating}
                             />
@@ -102,7 +102,7 @@ export function AlertDetailSlideout({ alertId, onClose, isOpen, liveEvents }: Al
                                 disabled={simulating}
                                 onClick={() => simulate(alertId, { event_type: selectedEventType, recipient_count: recipientCount })}
                             >
-                                {simulating ? "Simulating…" : "Simulate Event"}
+                                {simulating ? 'Simulating…' : 'Simulate Event'}
                             </button>
                             {simError && <p className="error">{simError}</p>}
                         </div>

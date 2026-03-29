@@ -1,5 +1,5 @@
-import {Alert, AlertDetail, AlertSummary, CreateAlert, CreateDeliveryEvent, DeliveryEvent} from "../types.ts";
-import axios from "axios";
+import { Alert, AlertDetail, AlertSummary, CreateAlert, CreateDeliveryEvent, DeliveryEvent } from '../types.ts'
+import axios from 'axios'
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:8000/alerts'

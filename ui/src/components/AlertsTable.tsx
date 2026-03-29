@@ -1,4 +1,4 @@
-import {AlertsTableProps} from "../types.ts";
+import { AlertsTableProps } from '../types.ts'
 
 
 export function AlertsTable({ alerts, loading, latestEventByAlertId, onRowClick, onRefresh, onCreateAlert }: AlertsTableProps) {
@@ -32,7 +32,7 @@ export function AlertsTable({ alerts, loading, latestEventByAlertId, onRowClick,
             </table>
             <div className="table-footer">
                 <button className="refresh-btn" onClick={onRefresh} disabled={loading}>
-                    {loading ? "Refreshing…" : "Refresh"}
+                    {loading ? 'Refreshing…' : 'Refresh'}
                 </button>
                 <button className="create-btn" onClick={onCreateAlert}>
                     Create Alert

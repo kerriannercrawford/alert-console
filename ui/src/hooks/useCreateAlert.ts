@@ -1,6 +1,6 @@
-import {Alert, CreateAlert} from "../types.ts";
-import {useState} from "react";
-import {createAlert} from "../api/alert.ts";
+import { Alert, CreateAlert } from '../types.ts'
+import { useState } from 'react'
+import { createAlert } from '../api/alert.ts'
 
 
 export function useCreateAlert(): { alert?: Alert | null; error: string | null; create: (data: CreateAlert) => Promise<Alert | null>; loading: boolean } {
@@ -17,8 +17,8 @@ export function useCreateAlert(): { alert?: Alert | null; error: string | null; 
             setAlert(newAlert)
 
             return newAlert
-        } catch (error: any) {
-            setError(error?.message ?? "Failed to create alert")
+        } catch (error: unknown) {
+            setError(error instanceof Error ? error.message : 'Failed to create alert')
             return null
         } finally {
             setLoading(false)

@@ -1,11 +1,11 @@
-import {AlertDetail} from "../types.ts";
-import {useEffect, useState} from "react";
-import {fetchAlertDetails} from "../api/alert.ts";
+import { AlertDetail } from '../types.ts'
+import { useEffect, useState } from 'react'
+import { fetchAlertDetails } from '../api/alert.ts'
 
 export function useAlertDetail(alertId?: string | null): { alertDetail?: AlertDetail | null; error: string | null; loading: boolean } {
     const [alertDetail, setAlertDetail] = useState<AlertDetail | null>()
-    const [error, setError] = useState<string | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null)
+    const [loading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
         if (!alertId) {
@@ -14,10 +14,10 @@ export function useAlertDetail(alertId?: string | null): { alertDetail?: AlertDe
         }
 
         fetchAlertDetails(alertId).then((alertDetail) => {
-            setAlertDetail(alertDetail);
-            setLoading(false);
-        }).catch(error => setError(error?.message));
+            setAlertDetail(alertDetail)
+            setLoading(false)
+        }).catch(error => setError(error?.message))
     }, [alertId])
 
-    return { alertDetail, error, loading };
+    return { alertDetail, error, loading }
 }

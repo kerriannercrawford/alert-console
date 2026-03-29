@@ -1,18 +1,29 @@
 """
-For purposes of this takehome, decided to use an in-memory store to 
+For purposes of this takehome, decided to use an in-memory store to
 store the events for ease of implementation. This can be swapped out
 for a database-backed implementation without touching the rest of the app.
 """
-from api.models import Alert, AlertSummary, Severity, Status, Channel, CreateAlert, AlertDetail, CreateDeliveryEvent, DeliveryEvent
 import json
 import uuid
 from datetime import datetime, timezone
+
+from api.models import (
+    Alert,
+    AlertDetail,
+    AlertSummary,
+    Channel,
+    CreateAlert,
+    CreateDeliveryEvent,
+    DeliveryEvent,
+    Severity,
+    Status,
+)
 
 _alerts: dict[str, Alert] = {}
 _events_by_alert: dict[str, list] = {}
 
 def init_data() -> None:
-    with open("api/crud/data.json", "r") as f:
+    with open("api/crud/data.json") as f:
         data = json.load(f)
         for alert in data["alerts"]:
             _alerts[alert["id"]] = Alert(**alert)
@@ -40,7 +51,11 @@ def get_all(
     summaries = []
     for alert in alerts:
         events = _events_by_alert.get(alert.id, [])
-        latest = max(events, key=lambda e: e["timestamp"] if isinstance(e, dict) else e.timestamp, default=None)
+        latest = max(
+            events,
+            key=lambda e: e["timestamp"] if isinstance(e, dict) else e.timestamp,
+            default=None,
+        )
         if latest is not None and isinstance(latest, dict):
             latest = DeliveryEvent(**latest)
         summaries.append(AlertSummary(**alert.model_dump(), latest_event=latest))
@@ -69,7 +84,9 @@ def create_delivery_event(alert_id: str, data: CreateDeliveryEvent) -> DeliveryE
         _events_by_alert[alert_id] = []
     event_id = str(uuid.uuid4())
     timestamp = datetime.now(timezone.utc).isoformat()
-    event = DeliveryEvent(**data.model_dump(), id=event_id, alert_id=alert_id, timestamp=timestamp)
+    event = DeliveryEvent(
+        **data.model_dump(), id=event_id, alert_id=alert_id, timestamp=timestamp
+    )
     _events_by_alert[alert_id].append(event)
 
 

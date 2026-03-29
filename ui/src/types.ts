@@ -1,8 +1,8 @@
-export type Severity = "low" | "medium" | "high" | "critical"
-export type Audience = "responders" | "admins" | "all"
-export type Channel = "sms" | "email" | "push" | "chat"
-export type Status = "draft" | "active" | "resolved"
-export type EventType = "queued" | "sent" | "delivered" | "failed" | "read"
+export type Severity = 'low' | 'medium' | 'high' | 'critical'
+export type Audience = 'responders' | 'admins' | 'all'
+export type Channel = 'sms' | 'email' | 'push' | 'chat'
+export type Status = 'draft' | 'active' | 'resolved'
+export type EventType = 'queued' | 'sent' | 'delivered' | 'failed' | 'read'
 
 export type Alert = {
     id: string

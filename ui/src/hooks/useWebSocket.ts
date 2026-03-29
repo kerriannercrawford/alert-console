@@ -1,33 +1,33 @@
-import {useEffect, useState} from "react";
-import {DeliveryEvent} from "../types.ts";
-import {connectToAlertStream} from "../api/websocket.ts";
+import { useEffect, useState } from 'react'
+import { DeliveryEvent } from '../types.ts'
+import { connectToAlertStream } from '../api/websocket.ts'
 
 export function useWebSocket(onMessage: (data: DeliveryEvent) => void) {
-    const [isConnected, setIsConnected] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const [isConnected, setIsConnected] = useState(false)
+    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         const socket = connectToAlertStream(
             (data) => {
-                onMessage(data as DeliveryEvent);
+                onMessage(data as DeliveryEvent)
             },
             () => {
-                setIsConnected(true);
-                setError(null);
+                setIsConnected(true)
+                setError(null)
             },
             (error) => {
-                setError(error?.type || "WebSocket error");
-                setIsConnected(false);
+                setError(error?.type || 'WebSocket error')
+                setIsConnected(false)
             },
             () => {
-                setIsConnected(false);
+                setIsConnected(false)
             }
         )
 
         return () => {
-            socket.close();
+            socket.close()
         }
-    }, [onMessage]);
+    }, [onMessage])
 
-    return { isConnected, error };
+    return { isConnected, error }
 }
