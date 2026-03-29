@@ -19,7 +19,3 @@ app.add_middleware(
 
 app.include_router(alerts_router)
 app.include_router(websocket_router)
-
-@app.get("/", response_model=str)
-async def test_endpoint() -> str:
-    return "hello world"
