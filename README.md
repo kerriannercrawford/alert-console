@@ -142,6 +142,9 @@ Currently, the API returns all alerts in a single response. For the small number
 ### No Authentication
 The API is open and does not require any authentication. In a real system, some form of auth like API keys or JWT would be necessary to secure the endpoints and prevent unauthorized access.
 
+### Non-idempotent write endpoints
+Both `POST /alerts` and `POST /alerts/:id/events` generate their own UUIDs and timestamps server-side, which means they are not idempotent. Submitting the same request twice creates two separate records. In a production system this is a risk: a network timeout could cause the client to retry a request that already succeeded, resulting in duplicate alerts or events. A fix for this would be to implement idempotency keys on the frontend, like the UUID, and have the backend check for duplicates before creating new records.
+
 ---
 
 ## With more time...
@@ -160,3 +163,6 @@ We could add a reconnect strategy inside the `useWebSocket` hook to handle dropp
 
 ### Add table filtering
 I added the backend support for filtering by `status`, `severity`, and `channel` via query params, but the frontend doesn't currently have any UI to set those filters. Adding dropdowns or multi-selects for each of those fields in the `AlertsTable` component would allow users to filter the list. The selected filter values would be stored in local state, and passed as query params when fetching the alerts.
+
+### Fix initial WebSocket connection alert
+When the app first loads, the WebSocket connection is not established, so the "Live updates paused" toast is shown. This could be fixed by adding a `hasConnected` ref inside the `useWebSocket` hook that starts as `false` and only allows the toast to be shown if a connection attempt has been made. Once the first connection is established successfully, `hasConnected` would be set to `true`, allowing future disconnections to trigger the toast.
