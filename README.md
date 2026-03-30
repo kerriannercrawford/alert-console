@@ -2,19 +2,18 @@
 ## Setup
 
 **Backend**
-
+In terminal 1:
 ```bash
-cd api
 python -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r api/requirements.txt
 uvicorn api.main:app --reload
 ```
 
 Runs on `http://localhost:8000`. API docs available at `http://localhost:8000/docs`.
 
 **Frontend**
-
+In terminal 2:
 ```bash
 cd ui
 npm install
