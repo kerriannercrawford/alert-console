@@ -150,6 +150,13 @@ tbody tr:hover {
 
 .badge-empty { color: #d1d5db; }
 
+.table-empty {
+  text-align: center;
+  padding: 40px 16px;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
 /* ── Right-side slideout drawer ── */
 .drawer-backdrop {
   position: fixed;

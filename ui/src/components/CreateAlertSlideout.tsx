@@ -8,7 +8,7 @@ const channelOptions: Channel[] = ['sms', 'email', 'push', 'chat']
 const statusOptions: Status[] = ['draft', 'active', 'resolved']
 
 export function CreateAlertSlideout({ isOpen, onClose }: CreateAlertSlideoutProps) {
-    const { create, error, loading } = useCreateAlert()
+    const { create, loading } = useCreateAlert()
 
     const [title, setTitle] = useState('')
     const [message, setMessage] = useState('')
@@ -90,8 +90,6 @@ export function CreateAlertSlideout({ isOpen, onClose }: CreateAlertSlideoutProp
                                 ))}
                             </select>
                         </div>
-
-                        {error && <p className="error">{error}</p>}
 
                         <div>
                             <button type="submit" disabled={loading}>

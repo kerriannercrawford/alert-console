@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { DeliveryEvent } from '../types.ts'
 import { connectToAlertStream } from '../api/websocket.ts'
 
 export function useWebSocket(onMessage: (data: DeliveryEvent) => void) {
     const [isConnected, setIsConnected] = useState(false)
-    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         const socket = connectToAlertStream(
@@ -13,11 +13,10 @@ export function useWebSocket(onMessage: (data: DeliveryEvent) => void) {
             },
             () => {
                 setIsConnected(true)
-                setError(null)
             },
-            (error) => {
-                setError(error?.type || 'WebSocket error')
+            () => {
                 setIsConnected(false)
+                toast.error('Lost real-time connection. Live updates may be delayed.')
             },
             () => {
                 setIsConnected(false)
@@ -29,5 +28,5 @@ export function useWebSocket(onMessage: (data: DeliveryEvent) => void) {
         }
     }, [onMessage])
 
-    return { isConnected, error }
+    return { isConnected }
 }

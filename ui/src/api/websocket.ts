@@ -11,8 +11,12 @@ export function connectToAlertStream(
     }
 
     socket.onmessage = (event) => {
-        const data = JSON.parse(event.data)
-        onMessage(data)
+        try {
+            const data = JSON.parse(event.data)
+            onMessage(data)
+        } catch {
+            console.error('Failed to parse WebSocket message:', event.data)
+        }
     }
 
     socket.onerror = (error) => {

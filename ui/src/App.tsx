@@ -5,9 +5,10 @@ import { AlertDetailSlideout } from './components/AlertDetailSlideout.tsx'
 import { CreateAlertSlideout } from './components/CreateAlertSlideout.tsx'
 import { DeliveryEvent } from './types.ts'
 import { useWebSocket } from './hooks/useWebSocket.ts'
+import { Toaster } from 'react-hot-toast'
 
 export default function App() {
-    const { alerts, loading, error, refetch } = useAlerts()
+    const { alerts, loading, refetch } = useAlerts()
     const [selectedAlertId, setSelectedAlertId] = useState<string | null>(null)
     const [createAlertOpen, setCreateAlertOpen] = useState(false)
     const [deliveryEvents, setDeliveryEvents] = useState<DeliveryEvent[]>([])
@@ -45,16 +46,16 @@ export default function App() {
         return map
     }, [alerts, deliveryEvents])
 
-    const { error: websocketError } = useWebSocket(handleIncomingEvent)
+    useWebSocket(handleIncomingEvent)
 
     return (
         <div className="App">
+            <Toaster position="top-right" />
             <h1>Alerts</h1>
             { loading && <p>Loading...</p> }
-            { (error || websocketError) && <p style={{ color: 'red' }}>Error: {error || websocketError}</p> }
 
             {
-                !loading && !error && (
+                !loading && (
                     <AlertsTable
                         alerts={alerts}
                         loading={loading}

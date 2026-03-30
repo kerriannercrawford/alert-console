@@ -6,11 +6,11 @@ import { useEffect, useMemo, useState } from 'react'
 const eventTypeOptions: EventType[] = ['queued', 'sent', 'delivered', 'failed', 'read']
 
 export function AlertDetailSlideout({ alertId, onClose, isOpen, liveEvents }: AlertDetailSlideoutProps) {
-    const { alertDetail, loading, error } = useAlertDetail(alertId)
+    const { alertDetail, loading } = useAlertDetail(alertId)
     const [localAlertDetail, setLocalAlertDetail] = useState<AlertDetail | null>(null)
     const [selectedEventType, setSelectedEventType] = useState<EventType>('queued')
     const [recipientCount, setRecipientCount] = useState<number | null>(null)
-    const { simulate, loading: simulating, error: simError } = useCreateDeliveryEvent()
+    const { simulate, loading: simulating } = useCreateDeliveryEvent()
 
     useEffect(() => {
         setLocalAlertDetail(alertDetail ?? null)
@@ -52,7 +52,6 @@ export function AlertDetailSlideout({ alertId, onClose, isOpen, liveEvents }: Al
                 </div>
 
                 {alertId && loading && <p>Loading alert details...</p>}
-                {alertId && error && <p>{error}</p>}
 
                 {alertId && alertDetail && (
                     <>
@@ -104,7 +103,6 @@ export function AlertDetailSlideout({ alertId, onClose, isOpen, liveEvents }: Al
                             >
                                 {simulating ? 'Simulating…' : 'Simulate Event'}
                             </button>
-                            {simError && <p className="error">{simError}</p>}
                         </div>
                     </>
                 )}
